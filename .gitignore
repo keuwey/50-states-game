@@ -1,0 +1,7 @@
+.venv
+.idea
+.mypy_cache/
+.dmypy.json
+dmypy.json
+requirements.txt
+__pycache__
