@@ -24,8 +24,9 @@ def read_state_data():
 
 
 def prompt_state_name(guessed_states):
-    return setup_screen().textinput(title=f"{len(guessed_states)}/50 States Correct",
-                                    prompt="What's another state name?").title()
+    textinput = setup_screen().textinput(title=f"{len(guessed_states)}/50 States Correct",
+                                         prompt="What's another state name?")
+    return textinput.title() if textinput is not None else None
 
 
 def save_states_to_learn(states_to_learn):
@@ -52,7 +53,8 @@ def main():
         answer_state = prompt_state_name(guessed_states)
 
         if answer_state == "Exit":
-            states_to_learn = [state for state in all_states if state not in guessed_states]
+            states_to_learn = [
+                state for state in all_states if state not in guessed_states]
             save_states_to_learn(states_to_learn)
             break
 
@@ -60,7 +62,7 @@ def main():
             guessed_states.append(answer_state)
             state_data = data[data.state == answer_state]
             turtle_pen.goto(state_data.x.iloc[0], state_data.y.iloc[0])
-            turtle_pen.write(state_data.state.item())
+            turtle_pen.write(state_data.state.iloc[0])
 
 
 if __name__ == "__main__":
